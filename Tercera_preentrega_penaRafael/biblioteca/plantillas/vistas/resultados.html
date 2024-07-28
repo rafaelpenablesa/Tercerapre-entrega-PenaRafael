@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de la Búsqueda</title>
+</head>
+<body>
+    <h1>Resultados para "{{ query }}"</h1>
+    <ul>
+        {% for libro in resultados %}
+            <li>{{ libro.titulo }} por {{ libro.autor }}</li>
+        {% empty %}
+            <li>No se encontraron resultados</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
