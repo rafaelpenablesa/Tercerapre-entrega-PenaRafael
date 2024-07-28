@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Buscar</title>
-</head>
-<body>
-    <h1>Buscar Libros</h1>
-    <form method="get">
-        {{ form.as_p }}
-        <button type="submit">Buscar</button>
-    </form>
-</body>
-</html>
+{% extends 'vistas/base.html' %}
+
+{% block title %}Buscar{% endblock %}
+
+{% block content %}
+<h1>Buscar Libros</h1>
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit">Buscar</button>
+</form>
+{% endblock %}
+
