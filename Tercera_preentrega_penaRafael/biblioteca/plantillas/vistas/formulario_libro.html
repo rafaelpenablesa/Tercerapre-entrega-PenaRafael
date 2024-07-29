@@ -1,0 +1,45 @@
+{% extends 'vistas/base.html' %}
+
+{% block title %}Formulario de Creación de Libro{% endblock %}
+
+{% block content %}
+<h1>Formulario de Creación de Libro</h1>
+{% if messages %}
+    <div>
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+<p>Utilice este formulario para agregar un nuevo libro al catálogo. Por favor, complete toda la información solicitada.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <label for="id_titulo">Título:</label>
+        {{ form.titulo }}
+        <p>Ingrese el título del libro.</p>
+    </div>
+    <div>
+        <label for="id_autor">Autor:</label>
+        {{ form.autor }}
+        <p>Ingrese el nombre del autor del libro.</p>
+    </div>
+    <div>
+        <label for="id_fecha_donacion">Fecha de Donación:</label>
+        {{ form.fecha_donacion }}
+        <p>Ingrese la fecha en que el libro fue donado (AAAA-MM-DD).</p>
+    </div>
+    <div>
+        <label for="id_condicion">Condición:</label>
+        {{ form.condicion }}
+        <p>Seleccione la condición del libro.</p>
+    </div>
+    <div>
+        <label for="id_nombre_donante">Nombre del Donante:</label>
+        {{ form.nombre_donante }}
+        <p>Ingrese el nombre de la persona que donó el libro.</p>
+    </div>
+    <button type="submit">Guardar</button>
+</form>
+{% endblock %}

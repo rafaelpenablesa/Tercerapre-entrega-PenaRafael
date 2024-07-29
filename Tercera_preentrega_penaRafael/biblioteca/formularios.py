@@ -9,7 +9,7 @@ class AutorForm(forms.ModelForm):
 class LibroForm(forms.ModelForm):
     class Meta:
         model = Libro
-        fields = '__all__'
+        fields = ['titulo', 'autor', 'fecha_donacion', 'condicion', 'nombre_donante']
 
 class EditorialForm(forms.ModelForm):
     class Meta:

@@ -1,16 +1,18 @@
 from django.shortcuts import render, redirect
-from .models import Autor, Libro, Editorial
-from .formularios import AutorForm, LibroForm, EditorialForm, BuscarForm
+from .models import Libro
+from .formularios import LibroForm, BuscarForm
+from django.contrib import messages
 
-def crear_autor(request):
+def crear_libro(request):
     if request.method == "POST":
-        form = AutorForm(request.POST)
+        form = LibroForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('crear_autor')
+            messages.success(request, '¡Gracias por Donar tu libro!')
+            return redirect('crear_libro')
     else:
-        form = AutorForm()
-    return render(request, 'vistas/formulario.html', {'form': form})
+        form = LibroForm()
+    return render(request, 'vistas/formulario_libro.html', {'form': form})
 
 def buscar(request):
     if request.method == "GET":
