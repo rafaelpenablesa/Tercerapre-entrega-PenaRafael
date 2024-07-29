@@ -8,7 +8,7 @@
 1. Clonar el repositorio:
     ```bash
     git clone <URL_DEL_REPOSITORIO>
-    cd Tercerpapre-entrega+PenaRafael
+    cd Tercerapre-entrega+PenaRafael
     ```
 
 2. Crear un entorno virtual:
