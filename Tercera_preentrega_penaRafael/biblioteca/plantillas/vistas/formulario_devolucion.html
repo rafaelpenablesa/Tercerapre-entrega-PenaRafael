@@ -1,0 +1,20 @@
+{% extends 'vistas/base.html' %}
+
+{% block title %}Formulario de Devolución de Libro{% endblock %}
+
+{% block content %}
+<h1>Formulario de Devolución de Libro</h1>
+{% if messages %}
+    <div>
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+<p>Utilice este formulario para registrar la devolución del libro "{{ libro.titulo }}".</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Registrar Devolución</button>
+</form>
+{% endblock %}

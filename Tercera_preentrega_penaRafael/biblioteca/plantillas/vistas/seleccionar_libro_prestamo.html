@@ -1,0 +1,15 @@
+{% extends 'vistas/base.html' %}
+
+{% block title %}Seleccionar Libro para Préstamo{% endblock %}
+
+{% block content %}
+<h1>Seleccionar Libro para Préstamo</h1>
+<ul>
+    {% for libro in libros %}
+        <li>
+            {{ libro.titulo }} - {{ libro.autor }}
+            <a href="{% url 'pedir_prestamo' libro.id %}">Pedir Préstamo</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

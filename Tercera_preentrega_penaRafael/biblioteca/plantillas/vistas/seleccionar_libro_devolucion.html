@@ -1,0 +1,15 @@
+{% extends 'vistas/base.html' %}
+
+{% block title %}Seleccionar Libro para Devolución{% endblock %}
+
+{% block content %}
+<h1>Seleccionar Libro para Devolución</h1>
+<ul>
+    {% for libro in libros %}
+        <li>
+            {{ libro.titulo }} - {{ libro.autor }}
+            <a href="{% url 'registrar_devolucion' libro.id %}">Registrar Devolución</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
