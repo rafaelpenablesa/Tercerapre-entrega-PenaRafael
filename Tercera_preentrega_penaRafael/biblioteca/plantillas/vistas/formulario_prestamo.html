@@ -16,15 +16,21 @@
 <form method="post">
     {% csrf_token %}
     <div>
-        <label for="id_prestatario">Nombre del Prestatario:</label>
+        <label for="id_prestatario">Prestatario:</label>
         {{ form.prestatario }}
-        <p>Ingrese el nombre del prestatario.</p>
+        <p>Seleccione el prestatario del libro.</p>
     </div>
     <div>
         <label for="id_fecha_prestamo">Fecha de Préstamo:</label>
         {{ form.fecha_prestamo }}
         <p>Ingrese la fecha del préstamo (AAAA-MM-DD).</p>
     </div>
+    <div>
+        <label for="id_fecha_devolucion">Fecha de Devolución:</label>
+        {{ form.fecha_devolucion }}
+        <p>Ingrese la fecha de devolución (opcional).</p>
+    </div>
     <button type="submit">Guardar</button>
 </form>
 {% endblock %}
+

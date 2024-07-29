@@ -1,17 +1,20 @@
 from django import forms
-from .models import Libro
+from .models import Libro, Prestatario, Prestamo
 
 class LibroForm(forms.ModelForm):
     class Meta:
         model = Libro
         fields = ['titulo', 'autor', 'fecha_donacion', 'condicion', 'nombre_donante']
 
-class PrestamoForm(forms.Form):
-    prestatario = forms.CharField(max_length=200, label='Nombre del Prestatario')
-    fecha_prestamo = forms.DateField(label='Fecha de Préstamo')
+class PrestatarioForm(forms.ModelForm):
+    class Meta:
+        model = Prestatario
+        fields = ['nombre', 'email']
 
-class DevolucionForm(forms.Form):
-    pass
+class PrestamoForm(forms.ModelForm):
+    class Meta:
+        model = Prestamo
+        fields = ['prestatario', 'fecha_prestamo', 'fecha_devolucion']
 
 class BuscarForm(forms.Form):
     query = forms.CharField(label='Buscar libros', max_length=200)

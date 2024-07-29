@@ -1,0 +1,30 @@
+{% extends 'vistas/base.html' %}
+
+{% block title %}Formulario de Agregar Prestatario{% endblock %}
+
+{% block content %}
+<h1>Formulario de Agregar Prestatario</h1>
+{% if messages %}
+    <div>
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+<p>Utilice este formulario para agregar un nuevo prestatario. Por favor, complete toda la información solicitada.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <label for="id_nombre">Nombre:</label>
+        {{ form.nombre }}
+        <p>Ingrese el nombre del prestatario.</p>
+    </div>
+    <div>
+        <label for="id_email">Email:</label>
+        {{ form.email }}
+        <p>Ingrese el email del prestatario.</p>
+    </div>
+    <button type="submit">Guardar</button>
+</form>
+{% endblock %}

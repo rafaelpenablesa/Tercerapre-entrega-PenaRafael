@@ -1,25 +1,36 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Libro
-from .formularios import LibroForm, PrestamoForm, DevolucionForm, BuscarForm
+from .models import Libro, Prestatario, Prestamo
+from .formularios import LibroForm, PrestatarioForm, PrestamoForm, BuscarForm
 from django.contrib import messages
 
 def donar_libro(request):
     if request.method == "POST":
         form = LibroForm(request.POST)
         if form.is_valid():
-            libro = form.save()
+            form.save()
             messages.success(request, '¡Gracias por Donar un Libro!')
             return redirect('donar_libro')
     else:
         form = LibroForm()
     return render(request, 'vistas/formulario_libro.html', {'form': form})
 
+def agregar_prestatario(request):
+    if request.method == "POST":
+        form = PrestatarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '¡Prestatario agregado con éxito!')
+            return redirect('agregar_prestatario')
+    else:
+        form = PrestatarioForm()
+    return render(request, 'vistas/formulario_prestatario.html', {'form': form})
+
 def seleccionar_libro_prestamo(request):
     libros = Libro.objects.all()
     return render(request, 'vistas/seleccionar_libro_prestamo.html', {'libros': libros})
 
 def seleccionar_libro_devolucion(request):
-    libros = Libro.objects.all()
+    libros = Prestamo.objects.filter(fecha_devolucion__isnull=True)
     return render(request, 'vistas/seleccionar_libro_devolucion.html', {'libros': libros})
 
 def pedir_prestamo(request, libro_id):
@@ -27,26 +38,23 @@ def pedir_prestamo(request, libro_id):
     if request.method == "POST":
         form = PrestamoForm(request.POST)
         if form.is_valid():
-            # Guardar la información del préstamo (no en la base de datos en este ejemplo)
-            messages.success(request, f'¡Libro "{libro.titulo}" prestado a {form.cleaned_data["prestatario"]}!')
-            return redirect('pedir_prestamo', libro_id=libro.id)
+            prestamo = form.save(commit=False)
+            prestamo.libro = libro
+            prestamo.save()
+            messages.success(request, f'¡Libro "{libro.titulo}" prestado a {prestamo.prestatario.nombre}!')
+            return redirect('seleccionar_libro_prestamo')
     else:
         form = PrestamoForm()
     return render(request, 'vistas/formulario_prestamo.html', {'form': form, 'libro': libro})
 
 def registrar_devolucion(request, libro_id):
-    libro = get_object_or_404(Libro, id=libro_id)
+    prestamo = get_object_or_404(Prestamo, libro__id=libro_id, fecha_devolucion__isnull=True)
     if request.method == "POST":
-        # Registrar la devolución del libro (no en la base de datos en este ejemplo)
-        libro.prestatario = ''
-        libro.fecha_prestamo = None
-        libro.prestado = False
-        libro.save()
-        messages.success(request, f'¡Libro "{libro.titulo}" devuelto con éxito!')
-        return redirect('registrar_devolucion', libro_id=libro.id)
-    else:
-        form = DevolucionForm()
-    return render(request, 'vistas/formulario_devolucion.html', {'form': form, 'libro': libro})
+        prestamo.fecha_devolucion = timezone.now()
+        prestamo.save()
+        messages.success(request, f'¡Libro "{prestamo.libro.titulo}" devuelto con éxito!')
+        return redirect('seleccionar_libro_devolucion')
+    return render(request, 'vistas/formulario_devolucion.html', {'prestamo': prestamo})
 
 def buscar(request):
     if request.method == "GET":
