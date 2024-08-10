@@ -38,48 +38,73 @@
     - **Email address:** `rafaelpenablesa@gmail.com`
     - **Password:** `adminpassword` (Este es un ejemplo, usa una contraseña segura en producción)
 
+Acceso al Panel de Administración
+
+URL: http://127.0.0.1:8000/admin/
+
 3. Ejecutar el servidor de desarrollo:
     ```bash
     python manage.py runserver
     ```
 
-4. Acceder a la aplicación en el navegador:
-    - **Crear un nuevo libro:** [http://127.0.0.1:8000/biblioteca/crear_libro/](http://127.0.0.1:8000/biblioteca/crear_libro/)
-    - **Buscar libros:** [http://127.0.0.1:8000/biblioteca/buscar/](http://127.0.0.1:8000/biblioteca/buscar/)
-    - **Interfaz de administrador:** [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+Funcionalidades
+Donar un Libro
+Permite a los usuarios agregar nuevos libros al catálogo de la biblioteca.
 
-## Funcionalidades
-- Formulario para agregar un libro al catalogo de donaciones.
-- Búsqueda de libros por título.
-- Interfaz de administrador para gestionar autores, libros y editoriales.
+URL: http://127.0.0.1:8000/biblioteca/donar_libro/
+Formulario:
+Título
+Autor
+Fecha de Donación
+Condición (Mala, Buena, Excelente)
+Nombre del Donante
 
-## Datos de Ejemplo para Búsqueda
-### Set 1
-- **Título:** Cien Años de Soledad
-- **Autor:** Gabriel García Márquez
-- **Fecha de Donación:** 2022-03-15
-- **Condición:** Excelente
-- **Nombre del Donante:** María Fernández
+Agregar Prestatario
+Permite agregar nuevos prestatarios que pueden pedir libros prestados.
 
-### Set 2
-- **Título:** Don Quijote de la Mancha
-- **Autor:** Miguel de Cervantes
-- **Fecha de Donación:** 2021-06-20
-- **Condición:** Buena
-- **Nombre del Donante:** Juan Pérez
+URL: http://127.0.0.1:8000/biblioteca/agregar_prestatario/
+Formulario:
+Nombre
+Email
+Pedir Préstamo de Libro
+Permite seleccionar un libro del catálogo y registrar el préstamo a un prestatario.
 
-### Set 3
-- **Título:** La Sombra del Viento
-- **Autor:** Carlos Ruiz Zafón
-- **Fecha de Donación:** 2023-01-10
-- **Condición:** Regular
-- **Nombre del Donante:** Luis González
+URL: http://127.0.0.1:8000/biblioteca/seleccionar_libro_prestamo/
+Formulario:
+Prestatario
+Fecha de Préstamo
+Fecha de Devolución (opcional)
+Registrar Devolución de Libro
+Permite registrar la devolución de un libro prestado.
 
+URL: http://127.0.0.1:8000/biblioteca/seleccionar_libro_devolucion/
+Buscar Libros
+Permite buscar libros en el catálogo de la biblioteca.
 
-## Estructura del Proyecto
-- `biblioteca/models.py`: Definición de los modelos `Autor`, `Libro` y `Editorial`.
-- `biblioteca/formularios.py`: Formularios para los modelos.
-- `biblioteca/views.py`: Vistas para manejar la lógica de los formularios y las búsquedas.
-- `biblioteca/plantillas/vistas/`: Plantillas HTML con diseño y herencia.
-- `biblioteca/static/biblioteca/styles.css`: Archivo CSS para el diseño de las plantillas.
+URL: http://127.0.0.1:8000/biblioteca/buscar/
+Formulario:
+busqueda (título del libro)
+
+Ejemplos de Datos
+
+Libros
+
+Cien Años de Soledad
+Autor: Gabriel García Márquez
+Fecha de Donación: 2022-03-15
+Condición: Excelente
+Nombre del Donante: María Fernández
+Don Quijote de la Mancha
+
+Autor: Miguel de Cervantes
+Fecha de Donación: 2021-06-20
+Condición: Buena
+Nombre del Donante: Juan Pérez
+La Sombra del Viento
+
+Autor: Carlos Ruiz Zafón
+Fecha de Donación: 2023-01-10
+Condición: Regular
+Nombre del Donante: Luis González
+
 
