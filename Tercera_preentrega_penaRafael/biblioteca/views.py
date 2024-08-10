@@ -77,3 +77,6 @@ def buscar(request):
     else:
         form = BuscarForm()
     return render(request, 'vistas/buscar.html', {'form': form})
+
+def about(request):
+    return render(request, 'about.html')

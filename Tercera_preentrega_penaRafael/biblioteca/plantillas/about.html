@@ -1,0 +1,22 @@
+{% extends 'vistas/base.html' %}
+{% load static %}
+{% block title %}Acerca de mí{% endblock %}
+
+{% block content %}
+<h1>Acerca de mí</h1>
+
+<!-- Imagen -->
+<div style="text-align: center; margin-bottom: 20px;">
+    <img src="{% static 'img/mi_foto.jpg' %}" alt="Foto de Rafael" style="border-radius: 50%; width: 200px; height: 200px;">
+</div>
+
+<!-- Descripción -->
+<p>¡Hola! Mi nombre es Rafael, soy QA Engineer para una compañía de puntos de venta. Mi meta principal en este curso es familiarizarme con el lenguaje de programación, para poder leer código y, en un futuro, implementar automatización.</p>
+<p>Este proyecto es una parte esencial de mi aprendizaje y me ayudará a avanzar en mis habilidades técnicas.</p>
+
+<!-- Enlaces -->
+<div style="text-align: center;">
+    <a href="https://github.com/rafaelpenablesa" target="_blank" style="margin-right: 15px;">GitHub</a>
+    <a href="https://www.linkedin.com/in/rafael-ignacio-pe%C3%B1a-blesa-6424243a/" target="_blank">LinkedIn</a>
+</div>
+{% endblock %}
