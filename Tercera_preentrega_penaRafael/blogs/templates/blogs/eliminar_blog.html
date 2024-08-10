@@ -1,0 +1,14 @@
+{% extends 'vistas/base.html' %}
+
+{% block title %}Eliminar Blog{% endblock %}
+
+{% block content %}
+<h1>Eliminar Blog</h1>
+<p>¿Estás seguro de que deseas eliminar el blog "{{ blog.titulo }}"?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sí, eliminar</button>
+</form>
+<a href="{% url 'detalle_blog' blog.id %}">Cancelar</a>
+{% endblock %}

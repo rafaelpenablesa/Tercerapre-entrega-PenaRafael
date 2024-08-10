@@ -1,4 +1,5 @@
-from django.urls import path
+from django.contrib import admin 
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -10,4 +11,3 @@ urlpatterns = [
     path('registrar_devolucion/<int:libro_id>/', views.registrar_devolucion, name='registrar_devolucion'),
     path('buscar/', views.buscar, name='buscar'),
 ]
-

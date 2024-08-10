@@ -18,9 +18,20 @@ def agregar_prestatario(request):
     if request.method == "POST":
         form = PrestatarioForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, '¡Prestatario agregado con éxito!')
-            return redirect('agregar_prestatario')
+            user = User.objects.create_user(
+                username=form.cleaned_data['nombre'],
+                email=form.cleaned_data['email'],
+                password='defaultpassword123'  
+            )
+            
+            prestatario = Prestatario.objects.create(
+                user=user,
+                nombre=form.cleaned_data['nombre'],
+                email=form.cleaned_data['email'],
+            )
+            return redirect('home')
+            
+
     else:
         form = PrestatarioForm()
     return render(request, 'vistas/formulario_prestatario.html', {'form': form})

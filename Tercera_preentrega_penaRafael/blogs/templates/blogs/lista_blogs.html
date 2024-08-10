@@ -1,0 +1,15 @@
+{% extends 'vistas/base.html' %}
+
+{% block title %}Lista de Blogs{% endblock %}
+
+{% block content %}
+<h1>Lista de Blogs</h1>
+<ul>
+    {% for blog in blogs %}
+        <li>
+            <a href="{% url 'detalle_blog' blog.id %}">{{ blog.titulo }}</a> - {{ blog.autor }} - {{ blog.fecha }}
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'crear_blog' %}">Crear un nuevo blog</a>
+{% endblock %}

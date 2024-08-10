@@ -1,6 +1,7 @@
 from django import forms
 from .models import Libro, Prestatario, Prestamo
 
+
 class LibroForm(forms.ModelForm):
     class Meta:
         model = Libro
