@@ -15,9 +15,6 @@
             <!-- Opciones visibles antes de iniciar sesión -->
             <li><a href="{% url 'about' %}">Acerca de mí</a></li>
             <li><a href="{% url 'donar_libro' %}">Donar Libro</a></li>
-            <li><a href="{% url 'agregar_prestatario' %}">Agregar Prestatario</a></li>
-            <li><a href="{% url 'accounts:signup' %}">Registro</a></li>
-            <li><a href="{% url 'accounts:login' %}">Iniciar Sesión</a></li>
               
             {% if user.is_authenticated %}
                 <!-- Opciones visibles solo después de iniciar sesión -->
@@ -33,6 +30,9 @@
                     </form>
                     <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
                 </li>
+                {% else %}
+                <li><a href="{% url 'accounts:signup' %}">Registro</a></li>
+            <li><a href="{% url 'accounts:login' %}">Iniciar Sesión</a></li>
             {% endif %}
         </ul>
     </nav>
