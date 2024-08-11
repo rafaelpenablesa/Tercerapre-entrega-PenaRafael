@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Libro, Prestatario, Prestamo
+from .models import Libro, Prestamo
 from .formularios import LibroForm, PrestatarioForm, PrestamoForm, BuscarForm
 from django.contrib import messages
+from django.contrib.auth.hashers import make_password
+from .models import Prestatario
+
 
 def donar_libro(request):
     if request.method == "POST":
@@ -15,25 +18,21 @@ def donar_libro(request):
     return render(request, 'vistas/formulario_libro.html', {'form': form})
 
 def agregar_prestatario(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = PrestatarioForm(request.POST)
         if form.is_valid():
-            user = User.objects.create_user(
-                username=form.cleaned_data['nombre'],
-                email=form.cleaned_data['email'],
-                password='defaultpassword123'  
-            )
             
             prestatario = Prestatario.objects.create(
-                user=user,
                 nombre=form.cleaned_data['nombre'],
                 email=form.cleaned_data['email'],
-            )
-            return redirect('home')
-            
+                password=form.cleaned_data['password']
+            )   
+            messages.success(request, 'Prestatario agregado exitosamente.')
+            return redirect('seleccionar_libro_prestamo')
 
     else:
         form = PrestatarioForm()
+    
     return render(request, 'vistas/formulario_prestatario.html', {'form': form})
 
 def seleccionar_libro_prestamo(request):

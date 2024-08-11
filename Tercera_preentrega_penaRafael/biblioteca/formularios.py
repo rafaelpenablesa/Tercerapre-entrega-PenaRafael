@@ -8,9 +8,10 @@ class LibroForm(forms.ModelForm):
         fields = ['titulo', 'autor', 'fecha_donacion', 'condicion', 'nombre_donante']
 
 class PrestatarioForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)  
     class Meta:
         model = Prestatario
-        fields = ['nombre', 'email']
+        fields = ['nombre', 'email', 'password']
 
 class PrestamoForm(forms.ModelForm):
     class Meta:

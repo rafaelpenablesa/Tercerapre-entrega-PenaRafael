@@ -1,0 +1,10 @@
+<h2>Perfil de Usuario</h2>
+<p>Nombre: {{ user_profile.name }}</p>
+<p>Email: {{ user_profile.user.email }}</p>
+<p>Descripción: {{ user_profile.description }}</p>
+<p>Website: <a href="{{ user_profile.website }}">{{ user_profile.website }}</a></p>
+{% if user_profile.image %}
+    <img src="{{ user_profile.image.url }}" alt="Imagen de Perfil">
+{% else %}
+    <img src="{% static 'path/to/default_image.png' %}" alt="Imagen de Perfil por Defecto">
+{% endif %}

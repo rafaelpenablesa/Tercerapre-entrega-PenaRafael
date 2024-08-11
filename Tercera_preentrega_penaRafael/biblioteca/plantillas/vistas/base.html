@@ -12,12 +12,22 @@
     </header>
     <nav>
         <ul>
-            <li><a href="{% url 'about' %}">Acerca de mí</a></li>
-            <li><a href="{% url 'donar_libro' %}">Donar Libro</a></li>
-            <li><a href="{% url 'agregar_prestatario' %}">Agregar Prestatario</a></li>
-            <li><a href="{% url 'buscar' %}">Buscar Libros</a></li>
-            <li><a href="{% url 'seleccionar_libro_prestamo' %}">Pedir Préstamo</a></li>
-            <li><a href="{% url 'lista_blogs' %}">Reseñas de libros</a></li>
+              <!-- Opciones visibles antes de iniciar sesión -->
+              <li><a href="{% url 'about' %}">Acerca de mí</a></li>
+              <li><a href="{% url 'donar_libro' %}">Donar Libro</a></li>
+              <li><a href="{% url 'agregar_prestatario' %}">Agregar Prestatario</a></li>
+              <li><a href="{% url 'accounts:signup' %}">Registro</a></li>
+              <li><a href="{% url 'accounts:login' %}">Iniciar Sesión</a></li>
+              
+              {% if user.is_authenticated %}
+                  <!-- Opciones visibles solo después de iniciar sesión -->
+                  <li><a href="{% url 'buscar' %}">Buscar Libros</a></li>
+                  <li><a href="{% url 'seleccionar_libro_prestamo' %}">Pedir Préstamo</a></li>
+                  <li><a href="{% url 'lista_blogs' %}">Reseñas de libros</a></li>
+                  <li><a href="{% url 'accounts:profile' %}">Perfil</a></li>
+                  <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+              {% else %}
+              {% endif %}
         </ul>
     </nav>
     <main>
