@@ -28,10 +28,10 @@
                 
                 <!-- Logout button -->
                 <li>
-                    <form id="logout-form" action="{% url 'logout' %}" method="POST">
+                    <form id="logout-form" action="{% url 'logout' %}" method="post" style="display:none;">
                         {% csrf_token %}
-                        <button type="submit" style="background:none;border:none;color:blue;text-decoration:underline;cursor:pointer;">Cerrar Sesión</button>
                     </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
                 </li>
             {% endif %}
         </ul>
@@ -40,7 +40,7 @@
         {% block content %}{% endblock %}
     </main>
     <footer>
-        <p>© 2024 Tercera Proyecto Final Python Peña Rafael</p>
+        <p>© 2024 Proyecto Final Python Peña Rafael</p>
     </footer>
 </body>
 </html>

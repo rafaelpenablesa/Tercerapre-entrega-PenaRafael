@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('biblioteca/', include('biblioteca.urls')),
     path('blogs/', include('blogs.urls')),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='about'), name='logout'),
 ]
 
 if settings.DEBUG:

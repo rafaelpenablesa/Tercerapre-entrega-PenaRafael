@@ -5,6 +5,7 @@ from .forms import SignUpForm
 from .models import UserProfile
 from .forms import ProfileForm
 from django.contrib.auth import logout
+from django.views.decorators.http import require_POST
 
 def signup(request):
     if request.method == 'POST':
@@ -50,3 +51,8 @@ def delete_profile(request):
     user.delete()
     logout(request)
     return redirect('accounts:signup')
+
+@require_POST
+def custom_logout(request):
+    logout(request)
+    return redirect('about')
