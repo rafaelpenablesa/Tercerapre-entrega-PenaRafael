@@ -13,9 +13,10 @@
     <nav>
         <ul>
             <!-- Opciones visibles antes de iniciar sesión -->
+            <li><a href="{% url 'home' %}">home</a></li>
             <li><a href="{% url 'about' %}">Acerca de mí</a></li>
             <li><a href="{% url 'donar_libro' %}">Donar Libro</a></li>
-              
+             
             {% if user.is_authenticated %}
                 <!-- Opciones visibles solo después de iniciar sesión -->
                 <li><a href="{% url 'buscar' %}">Buscar Libros</a></li>
