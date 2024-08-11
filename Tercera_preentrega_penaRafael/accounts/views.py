@@ -3,6 +3,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import SignUpForm
 from .models import UserProfile
+from .forms import ProfileForm
+from django.contrib.auth import logout
 
 def signup(request):
     if request.method == 'POST':
@@ -30,5 +32,21 @@ def login_view(request):
     return render(request, 'accounts/login.html', {'form': form})
 
 def profile(request):
-    user_profile = UserProfile.objects.get(user=request.user)
-    return render(request, 'accounts/profile.html', {'user_profile': user_profile})
+    user_profile = request.user.userprofile
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:profile')
+    else:
+        form = ProfileForm(instance=user_profile, initial={
+            'email': request.user.email
+        })
+    
+    return render(request, 'accounts/profile.html', {'form': form, 'user_profile': user_profile})
+
+def delete_profile(request):
+    user = request.user
+    user.delete()
+    logout(request)
+    return redirect('accounts:signup')

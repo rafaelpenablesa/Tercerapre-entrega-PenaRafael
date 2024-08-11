@@ -1,6 +1,16 @@
+{% extends 'vistas/base.html' %}
 {% load static %}
 
+{% block title %}Perfil de Usuario{% endblock %}
+
+{% block content %}
 <h2>Perfil de Usuario</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Actualizar Perfil</button>
+</form>
+
 <p>Nombre: {{ user_profile.name }}</p>
 <p>Email: {{ user_profile.user.email }}</p>
 <p>Descripción: {{ user_profile.description }}</p>
@@ -10,3 +20,10 @@
 {% else %}
     <img src="{% static 'img/default.png' %}" alt="Imagen de Perfil por Defecto">
 {% endif %}
+
+<form method="post" action="{% url 'accounts:delete_profile' %}">
+    {% csrf_token %}
+    <button type="submit">Eliminar Perfil</button>
+</form>
+{% endblock %}
+
