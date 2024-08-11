@@ -55,4 +55,4 @@ def delete_profile(request):
 @require_POST
 def custom_logout(request):
     logout(request)
-    return redirect('about')
+    return redirect('home')
