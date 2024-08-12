@@ -16,7 +16,7 @@ class PrestatarioForm(forms.ModelForm):
 class PrestamoForm(forms.ModelForm):
     class Meta:
         model = Prestamo
-        fields = ['prestatario', 'fecha_prestamo', 'fecha_devolucion']
+        fields = ['fecha_prestamo', 'fecha_devolucion']
 
 class BuscarForm(forms.Form):
     query = forms.CharField(label='Buscar libros', max_length=200)

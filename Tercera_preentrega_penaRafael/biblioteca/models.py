@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Prestatario(models.Model):
     nombre = models.CharField(max_length=200)
@@ -25,10 +26,10 @@ class Libro(models.Model):
 
 class Prestamo(models.Model):
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
-    prestatario = models.ForeignKey(Prestatario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha_prestamo = models.DateField()
     fecha_devolucion = models.DateField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.libro.titulo} prestado a {self.prestatario.nombre}"
+        return f"{self.libro.titulo} prestado a {self.usuario.username}"
 

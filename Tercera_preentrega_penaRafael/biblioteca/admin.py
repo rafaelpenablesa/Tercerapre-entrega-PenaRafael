@@ -11,7 +11,7 @@ class PrestatarioAdmin(admin.ModelAdmin):
     search_fields = ('nombre', 'email')
 
 class PrestamoAdmin(admin.ModelAdmin):
-    list_display = ('libro', 'prestatario', 'fecha_prestamo', 'fecha_devolucion')
+    list_display = ('libro', 'usuario', 'fecha_prestamo', 'fecha_devolucion')
     list_filter = ('fecha_prestamo', 'fecha_devolucion')
     search_fields = ('libro__titulo', 'prestatario__nombre')
 

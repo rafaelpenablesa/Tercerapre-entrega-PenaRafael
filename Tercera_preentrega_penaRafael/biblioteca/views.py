@@ -4,6 +4,8 @@ from .formularios import LibroForm, PrestatarioForm, PrestamoForm, BuscarForm
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from .models import Prestatario
+from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 
 def donar_libro(request):
@@ -43,6 +45,7 @@ def seleccionar_libro_devolucion(request):
     libros = Prestamo.objects.filter(fecha_devolucion__isnull=True)
     return render(request, 'vistas/seleccionar_libro_devolucion.html', {'libros': libros})
 
+@login_required
 def pedir_prestamo(request, libro_id):
     libro = get_object_or_404(Libro, id=libro_id)
     if request.method == "POST":
@@ -50,8 +53,9 @@ def pedir_prestamo(request, libro_id):
         if form.is_valid():
             prestamo = form.save(commit=False)
             prestamo.libro = libro
+            prestamo.usuario = request.user  # Asignar el usuario logueado
             prestamo.save()
-            messages.success(request, f'¡Libro "{libro.titulo}" prestado a {prestamo.prestatario.nombre}!')
+            messages.success(request, f'¡Libro "{libro.titulo}" prestado a {request.user.username}!')
             return redirect('seleccionar_libro_prestamo')
     else:
         form = PrestamoForm()
