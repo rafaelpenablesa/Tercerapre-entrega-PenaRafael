@@ -38,8 +38,11 @@ def agregar_prestatario(request):
     return render(request, 'vistas/formulario_prestatario.html', {'form': form})
 
 def seleccionar_libro_prestamo(request):
-    libros = Libro.objects.all()
-    return render(request, 'vistas/seleccionar_libro_prestamo.html', {'libros': libros})
+    # Fetch the IDs of books currently on loan (regardless of fecha_devolucion)
+    prestados = Prestamo.objects.values_list('libro_id', flat=True)
+    libros_disponibles = Libro.objects.exclude(id__in=prestados)
+
+    return render(request, 'vistas/seleccionar_libro_prestamo.html', {'libros': libros_disponibles})
 
 def seleccionar_libro_devolucion(request):
     libros = Prestamo.objects.filter(fecha_devolucion__isnull=True)
@@ -53,14 +56,16 @@ def pedir_prestamo(request, libro_id):
         if form.is_valid():
             prestamo = form.save(commit=False)
             prestamo.libro = libro
-            prestamo.usuario = request.user  # Asignar el usuario logueado
+            prestamo.usuario = request.user  # Assign the logged-in user to the usuario field
             prestamo.save()
-            messages.success(request, f'¡Libro "{libro.titulo}" prestado a {request.user.username}!')
+            messages.success(request, f'¡Libro "{libro.titulo}" prestado con éxito!')
             return redirect('seleccionar_libro_prestamo')
     else:
         form = PrestamoForm()
     return render(request, 'vistas/formulario_prestamo.html', {'form': form, 'libro': libro})
 
+
+@login_required
 def registrar_devolucion(request, libro_id):
     prestamo = get_object_or_404(Prestamo, libro__id=libro_id, fecha_devolucion__isnull=True)
     if request.method == "POST":

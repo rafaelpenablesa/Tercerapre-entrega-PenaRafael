@@ -6,7 +6,6 @@
 {% block content %}
 <div class="profile-container">
     <h2>Perfil de Usuario</h2>
-    
     <div class="profile-columns">
         <div class="profile-image">
             {% if user_profile.image %}
@@ -22,10 +21,11 @@
             <p><strong>Email:</strong> {{ user_profile.user.email }}</p>
             <p><strong>Descripción:</strong> {{ user_profile.description }}</p>
             <p><strong>Website:</strong> <a href="{{ user_profile.website }}">{{ user_profile.website }}</a></p>
+            <button id="edit-btn" class="btn btn-secondary">Editar Perfil</button>
         </div>
     </div>
 
-    <button id="edit-btn" class="btn btn-secondary">Editar Perfil</button>
+    
 
     <div id="profile-form" class="profile-form" style="display: none;">
         <form method="post" enctype="multipart/form-data">
