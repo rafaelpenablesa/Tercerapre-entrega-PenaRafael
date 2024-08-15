@@ -9,14 +9,21 @@ body {
 }
 
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 1em 0;
+    background-color: #f0f0f0; 
+    padding: 15px;
     text-align: center;
+    border-bottom: 2px solid #ccc; 
+    color: #333;/
+}
+
+header h1 {
+    font-size: 2em; 
+    font-weight: normal; 
+    margin: 0;
 }
 
 nav {
-    background-color: #444;
+    background-color: #ece7e7;
     overflow: hidden;
 }
 
@@ -34,7 +41,7 @@ nav ul li {
 
 nav ul li a {
     color: #fff;
-    background-color: #444; /* Color de fondo para los enlaces */
+    background-color: #444; 
     padding: 14px 20px;
     text-decoration: none;
     display: inline-block;
@@ -42,8 +49,8 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: #555; /* Color de fondo cuando se hace hover */
-    color: #ffcc00; /* Color del texto cuando se hace hover */
+    background-color: #555; 
+    color: #ffcc00; 
 }
 
 main {
@@ -68,7 +75,7 @@ form {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 600px;
     margin: auto;
-    margin-bottom: 2em; /* Asegurar suficiente margen para el scroll */
+    margin-bottom: 2em; 
 }
 
 form h1 {
@@ -118,7 +125,7 @@ ul li {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Para permitir el scroll en el contenido principal */
+
 html, body {
     overflow: auto;
     height: 100%;

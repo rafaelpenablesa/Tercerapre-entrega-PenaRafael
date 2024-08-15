@@ -16,8 +16,10 @@ def crear_blog(request):
     if request.method == 'POST':
         form = BlogForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('lista_blogs')
+            blog = form.save(commit=False)
+            blog.autor = request.user  # Asigna el autor al usuario logueado
+            blog.save()
+            return redirect('lista_blogs') 
     else:
         form = BlogForm()
     return render(request, 'blogs/formulario_blog.html', {'form': form})
